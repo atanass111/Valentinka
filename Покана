@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>За моето Шуши ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffe4e1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        h1 { color: #d63384; }
+        p { font-size: 1.2rem; color: #555; }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yesBtn { background: #d63384; color: white; }
+        #noBtn { background: #6c757d; color: white; position: relative; }
+
+        /* Сърчица анимация */
+        .heart {
+            position: absolute;
+            color: #ffb6c1;
+            animation: float 5s linear infinite;
+            top: 100vh;
+        }
+
+        @keyframes float {
+            to { transform: translateY(-110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Хей, Шуши! 🍣❤️</h1>
+        <p>Ще бъдеш ли моят Валентин?</p>
+        <div class="buttons">
+            <button id="yesBtn" onclick="celebrate()">ДА!</button>
+            <button id="noBtn" onmouseover="moveButton()">Не</button>
+        </div>
+    </div>
+
+    <script>
+        // Бягащият бутон "Не"
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'absolute';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        // Реакция при "Да"
+        function celebrate() {
+            document.querySelector('.container').innerHTML = 
+                `<h1>Обичам те, Шуши! 🥰</h1>
+                 <p>Приготви се за незабравима вечер! 🥂✨</p>`;
+            for(let i=0; i<50; i++) createHeart();
+        }
+
+        // Създаване на плаващи сърца
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
